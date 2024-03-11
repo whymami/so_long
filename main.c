@@ -11,12 +11,55 @@ static void ft_create_window(t_game *game)
 	game->window = mlx_new_window(game->mlx,game->map->map_X * 64,game->map->map_Y * 64 , "SO_LONG");
 	mlx_loop(game->mlx);
 }
+
+void ft_get_locate (char c, int x, int y, t_game *game)
+{
+	game->pos = ft_calloc(1,sizeof(t_locate));
+	if(c == _PLAYER)
+	{
+		game->counters->p_counter++;
+		if(game->counters->p_counter > 1 || game->counters->p_counter == 0 && write(1, "çıktım", 10))
+			exit(1); // hata kodu ekle
+		game->pos->player_X = x;
+		game->pos->player_Y = y;
+	}
+	else if (c == _EXIT)
+	{
+		game->counters->e_counter++;
+		if(game->counters->e_counter > 1 || game->counters->e_counter == 0 && write(1, "çıktım", 10))
+			exit(1); // hata kodu ekle
+		game->pos->exit_X = x;
+		game->pos->exit_Y = y;
+	}
+	else if (c == _COLLECTIBLE)
+		game->counters->c_counter++;
+}
+
+static void ft_frame_control(t_game *game)
+{
+	int x;
+	int y;
+
+	y = -1;
+	x = -1;
+	while (++y < game->map->map_Y)
+		if ((game->map->game_map[y][0] != '1' || game->map->game_map[y][ft_len_not_nl(game->map->game_map[y]) - 1] != '1') && write(1, "başı sonu 1 değil", 21))
+			exit(1);
+	while (++x < game->map->map_X)
+	{
+		if ((game->map->game_map[0][x] != '1' || game->map->game_map[game->map->map_Y - 1][x] != '1') && write(1, "ortası 1 değil", 21))
+			exit(1);
+	}
+	ft_create_window(game);
+}
+
 static void ref_control(t_game *game)
 {
 	int x;
 	int y;
 
 	y = -1;
+	game->counters = ft_calloc(1, sizeof(t_counter));
 	while(++y < game->map->map_Y)
 	{
 		x = -1;
@@ -24,18 +67,17 @@ static void ref_control(t_game *game)
 		{
 			if (ft_strchr(_ELEMENTS, game->map->game_map[y][x]) == 0 && write(1, "kürtçe mi bu ne tanıyamadım\n", 33))
 				exit(1); //hata kodu ekle
-			else if (game->map->game_map[y][x] == _WALL)
-				write(1, "duvar buldum\n", 14);
 			else if (game->map->game_map[y][x] == _PLAYER)
-				write(1, "oyuncuyu buldum\n", 17);
-			else if (game->map->game_map[y][x] == _GROUND)
-				write(1, "zemin buldum\n", 14);
+				ft_get_locate(_PLAYER,x,y,game);
 			else if (game->map->game_map[y][x] == _COLLECTIBLE)
-				write(1, "çilek buldum\n", 15);
+				ft_get_locate(_COLLECTIBLE,x,y,game);
 			else if (game->map->game_map[y][x] == _EXIT)
-				write(1, "çıkışı buldum\n", 20);
+				ft_get_locate(_EXIT, x,y,game);
 		}
 	}
+	if(game->counters->c_counter < 1 && write(1, "çıktım", 10))
+		exit (1);
+	ft_frame_control(game);
 }
 static void ft_game_map_check(t_game *game)
 {

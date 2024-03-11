@@ -1,6 +1,6 @@
 #include "so_long.h"
 #include "unistd.h"
-#include "unistd.h"
+
 
 void ft_exit(int excode)
 {
@@ -24,13 +24,4 @@ int ft_len_not_nl(char *str)
 	while (str[i] != '\n' && str[i] != '\0')
 		i++;
 	return (i);
-}
-
-void ft_equal_null(t_game *game)
-{
-	game->map->map_X = 0;
-	game->map->map_Y = 0;
-	game->counters->c_counter = 0;
-	game->counters->e_counter = 0;
-	game->counters->p_counter = 0;
 }

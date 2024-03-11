@@ -37,6 +37,13 @@ typedef struct s_counter
 	int	c_counter;
 }	t_counter;
 
+typedef	 struct s_locate
+{
+	int player_X;
+	int player_Y;
+	int exit_X;
+	int exit_Y;
+}	t_locate;
 
 typedef struct s_state
 {
@@ -44,10 +51,11 @@ typedef struct s_state
 	void *window;
 	t_map *map;
 	t_counter *counters;
+	t_locate *pos;
 }	t_game;
 
 void ft_exit(int excode);
 int ft_len_not_nl(char *str);
-void ft_equal_null(t_game *game);
+void ft_allocater(t_game *game);
 
 #endif
