@@ -15,6 +15,28 @@ void ft_exit(int excode)
 	else if (excode == _MAP_LENGTH && write(1, _MAP_LENGTH_MSG, 38))
 		exit(_MAP_LENGTH);
 }
+void	ft_get_cords(t_game *game)
+{
+	int	h;
+	int	w;
+
+	h = 0;
+	game->pos = ft_calloc(1, sizeof(t_locate));
+	while (h < game->map->map_Y)
+	{
+		w = 0;
+		while (w < game->map->map_X)
+		{
+			if (game->map->game_map[h][w] == _PLAYER)
+			{
+				game->pos->player_X = w * 64;
+				game->pos->player_Y = h * 64;
+			}
+			w++;
+		}
+		h++;
+	}
+}
 
 int ft_len_not_nl(char *str)
 {

@@ -12,6 +12,13 @@
 # define _PLAYER 'P'
 # define _EXIT 'E'
 
+# define _KEY_A 0
+# define _KEY_S 1
+# define _KEY_D 2
+# define _KEY_W 13
+# define _KEY_ESC 53
+# define _KEY_EXİT 17
+
 #define _INV_ARG 1
 #define _INV_ARG_MSG "ERROR: INVALID ARGUMENT\nUSAGE: ./so_long <map/map.ber>"
 #define _MAP_NAME 2
@@ -43,7 +50,18 @@ typedef	 struct s_locate
 	int player_Y;
 	int exit_X;
 	int exit_Y;
+	int move;
 }	t_locate;
+
+typedef struct s_texture
+{
+	void	*player_img;
+	void	*ground_img;
+	void	*exit_img;
+	void	*coll_img;
+	void	*wall_img;
+}	t_textures;
+
 
 typedef struct s_state
 {
@@ -52,10 +70,12 @@ typedef struct s_state
 	t_map *map;
 	t_counter *counters;
 	t_locate *pos;
+	t_textures image;
 }	t_game;
 
 void ft_exit(int excode);
 int ft_len_not_nl(char *str);
 void ft_allocater(t_game *game);
+void	ft_get_cords(t_game *game);
 
 #endif
