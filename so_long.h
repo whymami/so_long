@@ -51,13 +51,16 @@ typedef	 struct s_locate
 	int exit_X;
 	int exit_Y;
 	int move;
+	int direction;
 }	t_locate;
 
 typedef struct s_texture
 {
 	void	*player_img;
+	void	*player_left_img;
 	void	*ground_img;
 	void	*exit_img;
+	void	*exit_full_img;
 	void	*coll_img;
 	void	*wall_img;
 }	t_textures;

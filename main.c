@@ -14,7 +14,9 @@ static void ft_get_path_xpm(t_game *game)
     game->image.exit_img = mlx_xpm_file_to_image(game->mlx,"texture/exit.xpm", &x,&y);
     game->image.ground_img = mlx_xpm_file_to_image(game->mlx,"texture/grass.xpm",&x,&y);
     game->image.player_img = mlx_xpm_file_to_image(game->mlx,"texture/character.xpm",&x,&y);
+	game->image.player_left_img = mlx_xpm_file_to_image(game->mlx,"texture/player_left.xpm",&x,&y);
     game->image.wall_img = mlx_xpm_file_to_image(game->mlx,"texture/wall.xpm",&x,&y);
+	game->image.exit_full_img = mlx_xpm_file_to_image(game->mlx,"texture/exitfull.xpm",&x,&y);
 }
 
 int ft_put_image(t_game *game)
@@ -23,7 +25,6 @@ int ft_put_image(t_game *game)
 	int y;
 
 	y = -1;
-	mlx_clear_window(game->mlx,game->window);
 	while (++y < game->map->map_Y)
 	{
 		x = -1;
@@ -32,12 +33,17 @@ int ft_put_image(t_game *game)
 			mlx_put_image_to_window(game->mlx,game->window,game->image.ground_img,x*64,y*64);
 			if(game->map->game_map[y][x] == _WALL)
 				mlx_put_image_to_window(game->mlx,game->window,game->image.wall_img,x *64,y*64);
-			else if (game->map->game_map[y][x] == _COLLECTIBLE)
+			if (game->map->game_map[y][x] == _COLLECTIBLE)
 				mlx_put_image_to_window(game->mlx,game->window,game->image.coll_img,x*64,y*64);
-			else if (game->map->game_map[y][x] == _EXIT)
-				mlx_put_image_to_window(game->mlx,game->window,game->image.exit_img,x*64,y*64);
 		}
-		mlx_put_image_to_window(game->mlx, game->window, game->image.player_img, game->pos->player_X, game->pos->player_Y);
+		if (game->pos->direction == 1)
+			mlx_put_image_to_window(game->mlx, game->window, game->image.player_left_img, game->pos->player_X, game->pos->player_Y);
+		else
+			mlx_put_image_to_window(game->mlx, game->window, game->image.player_img, game->pos->player_X, game->pos->player_Y);
+		if (game->counters->c_counter > 0)
+			mlx_put_image_to_window(game->mlx, game->window, game->image.exit_img, game->pos->exit_X, game->pos->exit_Y);
+		else
+			mlx_put_image_to_window(game->mlx, game->window, game->image.exit_full_img, game->pos->exit_X, game->pos->exit_Y);
 	}
 	return 0;
 }
@@ -72,10 +78,16 @@ static int ft_get_keycode (int keycode, t_game *game)
 		exit(0);
 	if (keycode == _KEY_A)
 		if(is_move(game,keycode) && printf("Move Step %d\n",game->pos->move++))
+		{
+			game->pos->direction = 1;
 			game->pos->player_X -= 64;
+		}
 	if (keycode == _KEY_D)
 		if(is_move(game,keycode) && printf("Move Step %d\n",game->pos->move++))
+		{
+			game->pos->direction = 0;
 			game->pos->player_X += 64;
+		}
 	if (keycode == _KEY_W)
 		if(is_move(game,keycode) && printf("Move Step %d\n",game->pos->move++))
 			game->pos->player_Y -= 64;
@@ -92,6 +104,7 @@ static void ft_create_window(t_game *game)
 	ft_get_cords(game);
 	game->window = mlx_new_window(game->mlx,game->map->map_X * 64,game->map->map_Y * 64 , "SO_LONG");
 	ft_get_path_xpm(game);
+	mlx_clear_window(game->mlx,game->window);
 	mlx_loop_hook(game->mlx, ft_put_image, game);
 	mlx_key_hook(game->window,ft_get_keycode,game);
 	mlx_loop(game->mlx);
@@ -101,16 +114,12 @@ static void ft_create_window(t_game *game)
 void ft_get_count (char c, int x, int y, t_game *game)
 {
 	if(c == _PLAYER && game->counters->p_counter++)
-	{
 		if(game->counters->p_counter > 1 || game->counters->p_counter == 0 && write(1, "çıktım", 10))
 			exit(1); // hata kodu ekle
-	}
-	else if (c == _EXIT && game->counters->e_counter++)
-	{
+	if (c == _EXIT && game->counters->e_counter++)
 		if(game->counters->e_counter > 1 || game->counters->e_counter == 0 && write(1, "çıktım", 10))
 			exit(1); // hata kodu ekle
-	}
-	else if (c == _COLLECTIBLE)
+	if (c == _COLLECTIBLE)
 		game->counters->c_counter++;
 }
 

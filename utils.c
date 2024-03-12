@@ -20,21 +20,24 @@ void	ft_get_cords(t_game *game)
 	int	h;
 	int	w;
 
-	h = 0;
+	h = -1;
 	game->pos = ft_calloc(1, sizeof(t_locate));
-	while (h < game->map->map_Y)
+	while (++h < game->map->map_Y)
 	{
-		w = 0;
-		while (w < game->map->map_X)
+		w = -1;
+		while (++w < game->map->map_X)
 		{
 			if (game->map->game_map[h][w] == _PLAYER)
 			{
 				game->pos->player_X = w * 64;
 				game->pos->player_Y = h * 64;
 			}
-			w++;
+			if (game->map->game_map[h][w] == _EXIT)
+			{
+				game->pos->exit_X = w * 64;
+				game->pos->exit_Y = h * 64;
+			}
 		}
-		h++;
 	}
 }
 
