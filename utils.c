@@ -1,6 +1,6 @@
 #include "so_long.h"
 #include "unistd.h"
-
+#include "stdio.h"
 
 void ft_exit(int excode)
 {
@@ -49,4 +49,18 @@ int ft_len_not_nl(char *str)
 	while (str[i] != '\n' && str[i] != '\0')
 		i++;
 	return (i);
+}
+
+void flood_fill (t_map *tmp_map, int y, int x)
+{
+	if (x < 0 || x > tmp_map->map_X || y < 0 || y > tmp_map->map_Y)
+		return ;
+	if (tmp_map->game_map[y][x] != _WALL && tmp_map->game_map[y][x] != 'F')
+	{
+		tmp_map->game_map[y][x] = 'F';
+		flood_fill(tmp_map, y - 1, x);
+		flood_fill(tmp_map, y + 1, x);
+		flood_fill(tmp_map, y, x - 1);
+		flood_fill(tmp_map, y, x + 1);
+	}
 }

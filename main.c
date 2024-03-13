@@ -5,18 +5,48 @@
 #include "fcntl.h"
 #include "stdio.h"
 
+static int ft_xpm_control (t_game *game)
+{
+	int fd;
+
+	fd = open("texture/collect.xpm",O_RDONLY);
+	if (fd < 0 && close(fd) && printf("collect.xpm not found\n"))
+		exit(1);
+	fd = open("texture/exit.xpm",O_RDONLY);
+	if (fd < 0 && close(fd) && printf("exit.xpm not found\n"))
+		exit(1);
+	fd = open("texture/grass.xpm",O_RDONLY);
+	if (fd < 0 && close(fd) && printf("grass.xpm not found\n"))
+		exit(1);
+	fd = open("texture/character.xpm",O_RDONLY);
+	if (fd < 0 && close(fd) && printf("character.xpm not found\n"))
+		exit(1);
+	fd = open("texture/player_left.xpm",O_RDONLY);
+	if (fd < 0 && close(fd) && printf("player_left.xpm not found\n"))
+		exit(1);
+	fd = open("texture/wall.xpm",O_RDONLY);
+	if (fd < 0 && close(fd) && printf("wall.xpm not found\n"))
+		exit(1);
+	fd = open("texture/exitfull.xpm",O_RDONLY);
+	if (fd < 0 && close(fd) && printf("exitfull.xpm not found\n"))
+		exit(1);
+	return (1);
+}
+
 static void ft_get_path_xpm(t_game *game)
 {
     int x;
     int y;
-
-    game->image.coll_img = mlx_xpm_file_to_image(game->mlx,"texture/collect.xpm",&x,&y);
-    game->image.exit_img = mlx_xpm_file_to_image(game->mlx,"texture/exit.xpm", &x,&y);
-    game->image.ground_img = mlx_xpm_file_to_image(game->mlx,"texture/grass.xpm",&x,&y);
-    game->image.player_img = mlx_xpm_file_to_image(game->mlx,"texture/character.xpm",&x,&y);
-	game->image.player_left_img = mlx_xpm_file_to_image(game->mlx,"texture/player_left.xpm",&x,&y);
-    game->image.wall_img = mlx_xpm_file_to_image(game->mlx,"texture/wall.xpm",&x,&y);
-	game->image.exit_full_img = mlx_xpm_file_to_image(game->mlx,"texture/exitfull.xpm",&x,&y);
+	if (ft_xpm_control(game))
+	{
+		game->image.coll_img = mlx_xpm_file_to_image(game->mlx,"texture/collect.xpm",&x,&y);
+		game->image.exit_img = mlx_xpm_file_to_image(game->mlx,"texture/exit.xpm", &x,&y);
+		game->image.ground_img = mlx_xpm_file_to_image(game->mlx,"texture/grass.xpm",&x,&y);
+		game->image.player_img = mlx_xpm_file_to_image(game->mlx,"texture/character.xpm",&x,&y);
+		game->image.player_left_img = mlx_xpm_file_to_image(game->mlx,"texture/player_left.xpm",&x,&y);
+		game->image.wall_img = mlx_xpm_file_to_image(game->mlx,"texture/wall.xpm",&x,&y);
+		game->image.exit_full_img = mlx_xpm_file_to_image(game->mlx,"texture/exitfull.xpm",&x,&y);
+	}
 }
 
 int ft_put_image(t_game *game)
@@ -74,6 +104,7 @@ static void ft_pos_control (t_game *game)
 }
 static int ft_get_keycode (int keycode, t_game *game)
 {
+	printf("%d\n",keycode);
 	if(keycode == _KEY_ESC || keycode == _KEY_EXİT)
 		exit(0);
 	if (keycode == _KEY_A)
@@ -98,17 +129,54 @@ static int ft_get_keycode (int keycode, t_game *game)
 	return 0;
 }
 
+static void is_reachable(t_map *tmp_game)
+{
+	int i;
+	int j;
+
+	i = -1;
+	while (++i < tmp_game->map_Y)
+	{
+		j = -1;
+		while (++j < tmp_game->map_X)
+			if(tmp_game->game_map[i][j] == _EXIT && printf("ERROR: Exit not reachable"))
+				exit (1);
+			else if(tmp_game->game_map[i][j] == _COLLECTIBLE && printf("ERROR: Collectible not reachable"))
+				exit (1);
+	}
+}
+
+static void copy_map (t_game *game)
+{
+	t_map tmp_map;
+	int i;
+
+	tmp_map.game_map = ft_calloc(game->map->map_Y, sizeof(char *));
+	i = -1;
+	while (++i < game->map->map_Y)
+		tmp_map.game_map[i] = ft_strdup(game->map->game_map[i]);
+	tmp_map.map_X = game->map->map_X;
+	tmp_map.map_Y = game->map->map_Y;
+	flood_fill(&tmp_map,game->pos->player_Y/64,game->pos->player_X/64);
+	is_reachable(&tmp_map);
+}
+
+static int ft_mouse_exit()
+{
+	exit(0);
+}
 static void ft_create_window(t_game *game)
 {
 	game->mlx = mlx_init();
 	ft_get_cords(game);
+	copy_map(game);
 	game->window = mlx_new_window(game->mlx,game->map->map_X * 64,game->map->map_Y * 64 , "SO_LONG");
 	ft_get_path_xpm(game);
 	mlx_clear_window(game->mlx,game->window);
 	mlx_loop_hook(game->mlx, ft_put_image, game);
 	mlx_key_hook(game->window,ft_get_keycode,game);
+	mlx_hook(game->window,17,0,ft_mouse_exit,game);
 	mlx_loop(game->mlx);
-	
 }
 
 void ft_get_count (char c, int x, int y, t_game *game)
@@ -251,7 +319,6 @@ static void	ft_map_check(char *str)
 
 int	main(int argc, char **argv)
 {
-
 	if (argc == 2)
 		ft_map_check(argv[1]);
 	else

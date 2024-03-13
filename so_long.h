@@ -80,5 +80,6 @@ void ft_exit(int excode);
 int ft_len_not_nl(char *str);
 void ft_allocater(t_game *game);
 void	ft_get_cords(t_game *game);
+void flood_fill (t_map *tmp_map, int y, int x);
 
 #endif
