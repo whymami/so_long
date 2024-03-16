@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:00:14 by muguveli          #+#    #+#             */
-/*   Updated: 2024/03/16 14:53:13 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/03/16 17:52:39 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	ft_game_map_check(t_game *game)
 		if (first_line != contro_line)
 			ft_exit(_MAP_LENGTH, "The map length is inconsistent", game);
 	}
+	ft_window_size(game);
 	ref_control(game);
 }
 

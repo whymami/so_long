@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:47:06 by muguveli          #+#    #+#             */
-/*   Updated: 2024/03/16 15:09:32 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/03/16 17:38:18 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@
 # define WALL_XPM_NOT_FOUND 19
 # define GRASS_XPM_NOT_FOUND 20
 # define COLL_XPM_NOT_FOUND 21
+# define WINDOW_SIZE_ERROR 22
 
 typedef struct s_map
 {
@@ -116,5 +117,6 @@ int		ft_get_keycode(int keycode, t_game *game);
 int		ft_mouse_exit(t_game *game);
 void	copy_map(t_game *game);
 int		is_reachable(t_map *tmp_game);
+void	ft_window_size(t_game *game);
 
 #endif
