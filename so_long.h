@@ -19,16 +19,28 @@
 # define _KEY_ESC 53
 # define _KEY_EXİT 17
 
+#define _SUCC_EXIT 0
 #define _INV_ARG 1
-#define _INV_ARG_MSG "ERROR: INVALID ARGUMENT\nUSAGE: ./so_long <map/map.ber>"
 #define _MAP_NAME 2
-#define _MAP_NAME_MSG "ERROR: Map name cannot be left blank"
 #define _INV_EXTENTION 3
-#define _INV_EXTENTION_MSG "ERROR: Invalid file extension. Map file must have the .ber extension"
 #define _MAP_NOT_OPEN 4
-#define _MAP_NOT_OPEN_MSG "ERROR: Map not found"
 #define _MAP_LENGTH 5
-#define _MAP_LENGTH_MSG "ERROR: The map length is inconsistent"
+#define _ALLOCATE_ERR 6
+#define _COLLECTIBLE_COUNT 7
+#define _UNRECOGNİZE_CHAR 8
+#define _FRAME_ERR 9
+#define _EXIT_COUNT 10
+#define _PLAYER_COUNT 11
+#define _COLL_REACHABLE 12
+#define _EXIT_REACHABLE 13
+#define _FINISH_GAME 14
+#define PLAYER_XPM_NOT_FOUND 15
+#define EXIT_XPM_NOT_FOUND 16
+#define EXITFULL_XPM_NOT_FOUND 17
+#define PLAYERLEFT_XPM_NOT_FOUND 18
+#define WALL_XPM_NOT_FOUND 19
+#define GRASS_XPM_NOT_FOUND 20
+#define COLL_XPM_NOT_FOUND 21
 
 typedef struct s_map
 {
@@ -73,13 +85,15 @@ typedef struct s_state
 	t_map *map;
 	t_counter *counters;
 	t_locate *pos;
-	t_textures image;
+	t_textures *image;
 }	t_game;
 
-void ft_exit(int excode);
+void	ft_exit(int err_no, char *err, t_game *game);
 int ft_len_not_nl(char *str);
 void ft_allocater(t_game *game);
 void	ft_get_cords(t_game *game);
 void flood_fill (t_map *tmp_map, int y, int x);
+void ft_dispose_map(t_map *map);
+void ft_dispose (t_game *game);
 
 #endif

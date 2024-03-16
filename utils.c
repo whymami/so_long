@@ -1,19 +1,42 @@
 #include "so_long.h"
-#include "unistd.h"
-#include "stdio.h"
 
-void ft_exit(int excode)
+void ft_dispose_map(t_map *map)
 {
-	if (excode == 1 && write(1, _INV_ARG_MSG, 55))
-		exit(_INV_ARG);
-	else if (excode == _MAP_NAME && write(1, _MAP_NAME_MSG, 37))
-		exit(_MAP_NAME);
-	else if (excode == _INV_EXTENTION && write(1, _INV_EXTENTION_MSG, 69))
-		exit(_INV_EXTENTION);
-	else if (excode == _MAP_NOT_OPEN && write(1, _MAP_NOT_OPEN_MSG, 21))
-		exit(_MAP_NOT_OPEN);
-	else if (excode == _MAP_LENGTH && write(1, _MAP_LENGTH_MSG, 38))
-		exit(_MAP_LENGTH);
+	if (!map)
+		return ;
+	int i;
+
+	i = -1;
+	while (++i < map->map_Y)
+		free(map->game_map[i]);
+	free(map->game_map);
+}
+void ft_dispose (t_game *game)
+{
+	if (!game)
+		return ;
+	free(game->counters);
+	ft_dispose_map(game->map);
+	free(game->pos);
+	free(game->image);
+	free(game->map);
+	free(game);
+}
+
+void	ft_exit(int err_no, char *err, t_game *game)
+{
+	ft_dispose(game);
+
+	if (err_no == _SUCC_EXIT || err_no == _FINISH_GAME)
+	{
+		ft_putstr_fd(err, 2);
+		exit (0);
+	}
+	ft_putstr_fd("ERROR: Excited With (", 2);
+	ft_putnbr_fd(err_no, 2);
+	ft_putstr_fd("): ", 2);
+	ft_putendl_fd(err, 2);
+	exit(err_no);
 }
 void	ft_get_cords(t_game *game)
 {
