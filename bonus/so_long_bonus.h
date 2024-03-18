@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: beyarsla <beyarsla@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 18:43:10 by muguveli          #+#    #+#             */
-/*   Updated: 2024/03/16 18:50:11 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:39:38 by beyarsla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "../lib/libft/libft.h"
 # include "../lib/get_next_line/get_next_line.h"
 # include "../lib/ft_printf/ft_printf.h"
+# include "fcntl.h"
 
 # define _ELEMENTS "10PECX"
 # define _WALL '1'
@@ -32,6 +33,7 @@
 # define _KEY_W 13
 # define _KEY_ESC 53
 # define _KEY_EXIT 17
+# define FRAME_DELAY 100000000
 
 # define _SUCC_EXIT 0
 # define _INV_ARG 1
@@ -56,27 +58,81 @@
 # define GRASS_XPM_NOT_FOUND 20
 # define COLL_XPM_NOT_FOUND 21
 # define WINDOW_SIZE_ERROR 22
+# define _ENEMY_REACHABLE 23
 
-typedef struct s_player_idle
+typedef struct s_map
 {
-	void	*player_idle1;
-	void	*player_idle2;
-	void	*player_idle3;
-	void	*player_idle4;
-}			t_player_idle;
+	char	**game_map;
+	int		map_x;
+	int		map_y;
+}			t_map;
 
-typedef struct s_player_walk
+typedef struct s_counter
 {
-	void	*player_walk1;
-	void	*player_walk2;
-	void	*player_walk3;
-	void	*player_walk4;
-}			t_player_walk;
+	int	p_counter;
+	int	e_counter;
+	int	c_counter;
+}		t_counter;
 
-typedef struct s_player
+typedef struct s_locate
 {
-	t_player_idle	*idle;
-	t_player_walk	*walk;
-}			t_player;
+    int player_x;
+    int player_y;
+    int exit_x;
+    int exit_y;
+    int move;
+    int direction;
+    int animating; // Bayrak
+} t_locate;
+
+
+typedef struct s_texture
+{
+	int		curr_p_img;
+
+	void	*player_right_walk1;
+	void	*player_right_walk2;
+	void	*player_right_walk3;
+	void	*player_right_walk4;
+	void	*player_right_walk5;
+	void	*player_right_walk6;
+	void	*player_right_walk7;
+
+	void	*ground_img;
+	void	*exit_img;
+	void	*exit_full_img;
+	void	*coll_img;
+	void	*wall_img;
+	int		player_walk_frame;
+}			t_textures;
+
+typedef struct s_state
+{
+	void		*mlx;
+	void		*window;
+	t_map		*map;
+	t_counter	*counters;
+	t_locate	*pos;
+	t_textures	*image;
+}				t_game;
+
+void	ft_exit(int err_no, char *err, t_game *game);
+int		ft_len_not_nl(char *str);
+void	ft_allocater(t_game *game);
+void	flood_fill(t_map *tmp_map, int y, int x);
+void	ft_dispose_map(t_map *map);
+void	ft_dispose(t_game *game);
+void	ft_map_check(char *str);
+void	ref_control(t_game *game);
+void	ft_create_window(t_game *game);
+void	ft_get_cords(t_game *game);
+void	ft_get_path_xpm(t_game *game);
+int		ft_get_keycode(int keycode, t_game *game);
+int		ft_mouse_exit(t_game *game);
+void	copy_map(t_game *game);
+int		is_reachable(t_map *tmp_game);
+void	ft_window_size(t_game *game);
+void	ft_direction(t_game *game);
+void ft_put_player(t_game *game);
 
 #endif
