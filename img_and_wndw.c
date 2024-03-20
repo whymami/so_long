@@ -31,8 +31,10 @@ static void	ft_direction(t_game *game)
 
 static int	ft_put_image(t_game *game)
 {
-	int	x;
-	int	y;
+	int x;
+	int y;
+
+	mlx_clear_window(game->mlx, game->window); // Her çerçevede pencereyi temizle
 
 	y = -1;
 	while (++y < game->map->map_y)
@@ -49,10 +51,11 @@ static int	ft_put_image(t_game *game)
 				mlx_put_image_to_window(game->mlx, game->window,
 					game->image->coll_img, x * 64, y * 64);
 		}
-		ft_direction(game);
 	}
+	ft_direction(game); // Oyuncu ve çıkış resimlerini çiz
 	return (0);
 }
+
 
 void	ft_create_window(t_game *game)
 {
@@ -62,7 +65,7 @@ void	ft_create_window(t_game *game)
 	game->window = mlx_new_window(game->mlx, game->map->map_x * 64,
 			game->map->map_y * 64, "SO_LONG");
 	ft_get_path_xpm(game);
-	mlx_clear_window(game->mlx, game->window);
+
 	mlx_loop_hook(game->mlx, ft_put_image, game);
 	mlx_key_hook(game->window, ft_get_keycode, game);
 	mlx_hook(game->window, 17, 0, ft_mouse_exit, game);

@@ -74,6 +74,7 @@ static void	key_a_d(t_game *game, int keycode)
 
 int	ft_get_keycode(int keycode, t_game *game)
 {
+	ft_printf("%d\n",keycode);
 	if (keycode == _KEY_ESC || keycode == _KEY_EXIT)
 		ft_exit(_SUCC_EXIT, "Exit successful", game);
 	if (keycode == _KEY_A || keycode == _KEY_D)

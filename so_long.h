@@ -26,12 +26,28 @@
 # define _PLAYER 'P'
 # define _EXIT 'E'
 
-# define _KEY_A 0
-# define _KEY_S 1
-# define _KEY_D 2
-# define _KEY_W 13
-# define _KEY_ESC 53
 # define _KEY_EXIT 17
+
+#ifndef _KEY_W
+# define _KEY_W 13
+#endif
+
+#ifndef _KEY_A
+# define _KEY_A 0
+#endif
+
+#ifndef _KEY_S
+# define _KEY_S 1
+#endif
+
+#ifndef _KEY_D
+# define _KEY_D 2
+#endif
+
+#ifndef _KEY_ESC
+# define _KEY_ESC 53
+#endif
+
 
 # define _SUCC_EXIT 0
 # define _INV_ARG 1

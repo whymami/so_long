@@ -52,16 +52,16 @@ CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 $(NAME): $(OBJ)
-	$(LİBC) $(NAME) $(OBJ)
+	@$(LİBC) $(NAME) $(OBJ)
 
 bonus: $(BNSOBJ)
-	$(LİBC) $(NAME) $(BNSOBJ)
+	@$(LİBC) $(NAME) $(BNSOBJ)
 
 clean: 
-	$(RM) $(OBJ) $(BNSOBJ)
+	@$(RM) $(OBJ) $(BNSOBJ)
 
 fclean: clean
-		$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean all
 
