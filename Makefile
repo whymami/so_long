@@ -47,7 +47,7 @@ BNS_SRC = \
 	bonus/move_bonus.c \
 	bonus/utils_bonus.c \
 	bonus/utils2_bonus.c \
-	# bonus/enemy_bonus.c \
+	bonus/enemy_bonus.c \
 
 OBJ = $(SRC:.c=.o)
 BNS_OBJ = $(BNS_SRC:.c=.o)

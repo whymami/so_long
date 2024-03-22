@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 15:50:58 by beyarsla          #+#    #+#             */
-/*   Updated: 2024/03/21 15:25:31 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:28:40 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	ft_get_cords(t_game *game)
 				game->pos->exit_x = w * 64;
 				game->pos->exit_y = h * 64;
 			}
+			// if (game->map->game_map[h][w] == _ENEMY)
+			// 	ft_set_enemy(game, h, w);
 		}
 	}
 }

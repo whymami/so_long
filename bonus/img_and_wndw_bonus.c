@@ -6,72 +6,11 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 15:49:38 by beyarsla          #+#    #+#             */
-/*   Updated: 2024/03/21 17:25:37 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:06:14 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
-
-// int put_enemy(t_game *game, int y, int x)
-// {
-// 	if (game->pos->e_direction == 1)
-// 		mlx_put_image_to_window(game->mlx, game->window, game->image->enemy_left_img, x, y);
-// 	else
-// 		mlx_put_image_to_window(game->mlx, game->window, game->image->enemy_img, x, y);
-// 	return (0);
-// }
-
-static void enemy_cords(t_game *game)
-{
-	int x;
-	int y;
-
-	y = -1;
-	while (++y < game->map->map_y)
-	{
-		x = -1;
-		while (++x < game->map->map_x)
-		{
-			if (game->map->game_map[y][x] == _ENEMY)
-			{
-				game->pos->enemy_x = x * 64;
-				game->pos->enemy_y = y * 64;
-			}
-		}
-	}
-}
-#include <stdio.h>
-int	flood_fill_enemy(t_game *game, int y, int x)
-{
-	printf("heyx: %d, y: %d\n", x, y);
-	if (x < 0 || x > game->map->map_x || y < 0 || y > game->map->map_y)
-		return 0;
-	if (game->map->game_map[y][x] != _WALL && game->map->game_map[y][x] != _EXIT && game->map->game_map[y][x] != _COLLECTIBLE)
-	{	
-		printf("hey2: %d, y: %d\n", x, y);
-
-		game->map->game_map[y][x] = 'X';	
-		return 1;
-	}
-	return 0;
-}
-
-int whereisenemy(t_game *game)
-{
-	enemy_cords(game);
-	static int i = 0;
-	i++;
-	
-	if (!(i % 20) && flood_fill_enemy(game, game->pos->enemy_y / 64, game->pos->enemy_x / 64 - 1))
-		game->map->game_map[game->pos->enemy_y / 64][game->pos->enemy_x / 64] = '0';
-	else if (!(i % 80) &&flood_fill_enemy(game, game->pos->enemy_y / 64 - 1, game->pos->enemy_x / 64))
-		game->map->game_map[game->pos->enemy_y / 64][game->pos->enemy_x / 64] = '0';
-	else if (!(i % 60) && flood_fill_enemy(game, game->pos->enemy_y / 64, game->pos->enemy_x / 64 + 1))
-		game->map->game_map[game->pos->enemy_y / 64][game->pos->enemy_x / 64] = '0';
-	else if (!(i % 40) && flood_fill_enemy(game, game->pos->enemy_y / 64 + 1, game->pos->enemy_x / 64))
-		game->map->game_map[game->pos->enemy_y / 64][game->pos->enemy_x / 64] = '0';
-	return 0;
-}
 
 static void	ft_direction(t_game *game)
 {
@@ -114,7 +53,6 @@ static int	ft_put_image(t_game *game)
 					game->image->enemy_img, x * 64, y * 64);
 		}
 		ft_direction(game);
-		// move_enemy(game);
 	}
 	return (0);
 }

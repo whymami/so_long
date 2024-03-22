@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   control1_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: beyarsla <beyarsla@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 15:47:01 by beyarsla          #+#    #+#             */
-/*   Updated: 2024/03/20 17:23:02 by beyarsla         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:13:14 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ static void	ft_get_count(char c, t_game *game)
 	if (c == _EXIT && game->counters->e_counter++)
 		if (game->counters->e_counter > 1 || game->counters->e_counter == 0)
 			ft_bns_exit(_EXIT_COUNT, "There should be one exit in the game", game);
+	if (c == _ENEMY && game->counters->x_counter++)
+		if (game->counters->x_counter > 1)
+			ft_bns_exit(_ENEMY_COUNT, "There should be one enemy in the game", game);
 	if (c == _COLLECTIBLE)
 		game->counters->c_counter++;
 }
@@ -88,6 +91,8 @@ void	ref_control(t_game *game)
 				ft_get_count(_COLLECTIBLE, game);
 			else if (game->map->game_map[y][x] == _EXIT)
 				ft_get_count(_EXIT, game);
+			else if (game->map->game_map[y][x] == _ENEMY)
+				ft_get_count(_ENEMY, game);
 		}
 	}
 	if (game->counters->c_counter < 1)

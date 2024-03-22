@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 15:41:30 by beyarsla          #+#    #+#             */
-/*   Updated: 2024/03/21 16:44:28 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:05:41 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@
 # define _EXIT 'E'
 # define _ENEMY 'X'
 
+# define _DIR_UP 0
+# define _DIR_DOWN 1
+# define _DIR_LEFT 2
+# define _DIR_RİGHT 3
+
 # define _KEY_A 0
 # define _KEY_S 1
 # define _KEY_D 2
 # define _KEY_W 13
 # define _KEY_ESC 53
 # define _KEY_EXIT 17
-
-# define DIR_LEFT 	42
-# define DIR_RIGHT 	31
-# define DIR_UP 	21
-# define DIR_DOWN 	1337
 
 # define _SUCC_EXIT 0
 # define _INV_ARG 1
@@ -62,6 +62,7 @@
 # define GRASS_XPM_NOT_FOUND 20
 # define COLL_XPM_NOT_FOUND 21
 # define WINDOW_SIZE_ERROR 22
+# define _ENEMY_COUNT 23
 
 typedef struct s_map
 {
@@ -75,6 +76,7 @@ typedef struct s_counter
 	int	p_counter;
 	int	e_counter;
 	int	c_counter;
+	int x_counter;
 }		t_counter;
 
 typedef struct s_locate
@@ -89,6 +91,13 @@ typedef struct s_locate
 	int	direction;
 	int e_direction;
 }		t_locate;
+
+typedef struct s_collectible_node 
+{
+    int x;
+    int y;
+    struct s_collectible_node *next;
+} 			t_collectible_node;
 
 typedef struct s_texture
 {
@@ -116,6 +125,7 @@ typedef struct s_state
 	t_counter	*counters;
 	t_locate	*pos;
 	t_textures	*image;
+	t_collectible_node *collectibles;
 }				t_game;
 
 void	copy_map(t_game *game);
@@ -133,9 +143,8 @@ void	ft_get_cords(t_game *game);
 int	ft_len_not_nl(char *str);
 void	flood_fill(t_map *tmp_map, int y, int x);
 int	is_reachable(t_map *tmp_game);
-// void enemy_move(t_game *game, int y, int x);
-// void move_enemy(t_game *game);
-// int put_enemy(t_game *game, int y, int x);
+int whereisenemy (t_game *game);
+int	flood_fill_enemy(t_game *game, int y, int x);
 
 
 #endif
