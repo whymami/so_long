@@ -64,5 +64,6 @@ Run the following command to compile the bonus part
 #### Mandatory part
 <img src="./img/so_long.gif"/>
 <br>
+
 #### Bonus:
 <img src="./img/bonus_video.gif"/>
