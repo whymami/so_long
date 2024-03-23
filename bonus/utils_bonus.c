@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 15:50:58 by beyarsla          #+#    #+#             */
-/*   Updated: 2024/03/22 16:28:40 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/03/23 11:57:17 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	ft_bns_exit(int err_no, char *err, t_game *game)
 		ft_putstr_fd(err, 2);
 		exit(0);
 	}
-	ft_putstr_fd("ERROR: Excited With (", 2);
+	ft_putstr_fd(RED "ERROR: Excited With (" COLOR_RESET, 2);
 	ft_putnbr_fd(err_no, 2);
-	ft_putstr_fd("): ", 2);
+	ft_putstr_fd(RED ") " COLOR_RESET, 2);
 	ft_putendl_fd(err, 2);
 	exit(err_no);
 }
@@ -58,6 +58,9 @@ void	ft_get_cords(t_game *game)
 
 	h = -1;
 	game->pos = ft_calloc(1, sizeof(t_locate));
+	if (!game->pos)
+		ft_bns_exit(_ALLOCATE_ERR,
+			YELLOW "Failed to allocate memory space" COLOR_RESET, game);
 	while (++h < game->map->map_y)
 	{
 		w = -1;
@@ -73,8 +76,6 @@ void	ft_get_cords(t_game *game)
 				game->pos->exit_x = w * 64;
 				game->pos->exit_y = h * 64;
 			}
-			// if (game->map->game_map[h][w] == _ENEMY)
-			// 	ft_set_enemy(game, h, w);
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 16:02:00 by beyarsla          #+#    #+#             */
-/*   Updated: 2024/03/21 16:47:49 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/03/23 14:51:02 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,25 @@ int	is_reachable(t_map *tmp_game)
 				return (1);
 			else if (tmp_game->game_map[i][j] == _COLLECTIBLE)
 				return (2);
+			else if (tmp_game->game_map[i][j] == _ENEMY)
+				return (3);
 		}
 	}
 	ft_dispose_map(tmp_game);
 	return (0);
+}
+
+void	ft_score(t_game *game)
+{
+	char	*score;
+	char	*move;
+
+	score = ft_itoa(game->score);
+	move = ft_itoa(game->pos->move);
+	mlx_string_put(game->mlx, game->window, 15, 15, 0xFFFF00, "Move Step: ");
+	mlx_string_put(game->mlx, game->window, 90, 15, 0xFFFFFF, move);
+	mlx_string_put(game->mlx, game->window, 15, 35, 0xFFFF00, "Score: ");
+	mlx_string_put(game->mlx, game->window, 90, 35, 0xFFFFFF, score);
+	free(score);
+	free(move);
 }

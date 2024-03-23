@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bonus_main.c                                       :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: beyarsla <beyarsla@student.42istanbul.c    +#+  +:+       +#+        */
+/*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 15:40:52 by beyarsla          #+#    #+#             */
-/*   Updated: 2024/03/20 15:47:34 by beyarsla         ###   ########.fr       */
+/*   Updated: 2024/03/23 13:31:14 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 		ft_bns_map_check(argv[1]);
 	else
-		ft_bns_exit(_INV_ARG, "INVALID ARGUMENT\nUSAGE: ./so_long <map/map.ber>",
-			NULL);
+		ft_bns_exit(_INV_ARG,
+			YELLOW "INVALID ARGUMENT\n" COLOR_RESET GREEN "USAGE:"
+			COLOR_RESET YELLOW "./so_long <map/map.ber>" COLOR_RESET, NULL);
 }

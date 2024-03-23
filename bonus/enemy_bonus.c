@@ -6,13 +6,13 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 15:23:27 by muguveli          #+#    #+#             */
-/*   Updated: 2024/03/22 17:07:38 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/03/23 14:36:29 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-void enemy_cords (t_game *game)
+void	enemy_cords(t_game *game)
 {
 	int	h;
 	int	w;
@@ -32,59 +32,83 @@ void enemy_cords (t_game *game)
 	}
 }
 
-int	flood_fill_enemy(t_game *game, int y, int x)
+static void	change_dir(t_game *game, int y, int x)
 {
-	static int i = 0;
-	i++;
-	if (x < 0 || x > game->map->map_x || y < 0 || y > game->map->map_y)
-		return 0;
-	if (x == game->pos->player_x / 64 && y == game->pos->player_y / 64)
-		ft_bns_exit(_FINISH_GAME, "You Lost", game);
-	if (game->map->game_map[y][x] == _EXIT || game->map->game_map[y][x] == _COLLECTIBLE || game->map->game_map[y][x] == _WALL || game->map->game_map[y][x] == _ENEMY)
+	if (game->map->game_map[y][x] == _EXIT
+		|| game->map->game_map[y][x] == _COLLECTIBLE
+		|| game->map->game_map[y][x] == _WALL
+		|| game->map->game_map[y][x] == _ENEMY)
 	{
 		if (game->pos->e_direction == _DIR_UP)
 			game->pos->e_direction = _DIR_DOWN;
 		else if (game->pos->e_direction == _DIR_DOWN)
-			game->pos->e_direction = _DIR_RİGHT;
-		else if (game->pos->e_direction == _DIR_RİGHT)
+			game->pos->e_direction = _DIR_RIGHT;
+		else if (game->pos->e_direction == _DIR_RIGHT)
 			game->pos->e_direction = _DIR_LEFT;
 		else if (game->pos->e_direction == _DIR_LEFT)
 			game->pos->e_direction = _DIR_UP;
 	}
-
-	if (game->map->game_map[y][x] != _WALL && game->map->game_map[y][x] != _EXIT && game->map->game_map[y][x] != _COLLECTIBLE && game->map->game_map[y][x] != _ENEMY)
-	{	
-		game->map->game_map[y][x] = 'X';	
-		return 1;
-	}
-	return 0;
 }
 
-int whereisenemy(t_game *game)
+int	flood_fill_enemy(t_game *game, int y, int x)
 {
-	enemy_cords(game);
-	static int i = 0;
-	i++;
+	static int	i = 0;
 
-	if (game->pos->e_direction == _DIR_LEFT)
-	{		
-		if (!(i % 30) && flood_fill_enemy(game, game->pos->enemy_y / 64, game->pos->enemy_x / 64 - 1))
-			game->map->game_map[game->pos->enemy_y / 64][game->pos->enemy_x / 64] = '0';
+	i++;
+	if (game->pos->enemy_x / 64 == game->pos->player_x / 64
+		&& game->pos->enemy_y / 64 == game->pos->player_y / 64)
+		ft_bns_exit(_FINISH_GAME, RED "YOU LOSE" COLOR_RESET, game);
+	if (x < 0 || x > game->map->map_x || y < 0 || y > game->map->map_y)
+		return (0);
+	change_dir(game, y, x);
+	if (game->map->game_map[y][x] != _WALL && game->map->game_map[y][x] != _EXIT
+		&& game->map->game_map[y][x] != _COLLECTIBLE
+		&& game->map->game_map[y][x] != _ENEMY)
+	{
+		game->map->game_map[y][x] = 'X';
+		return (1);
 	}
-	else if (game->pos->e_direction == _DIR_UP)
-	{	
-		if (!(i % 30) &&flood_fill_enemy(game, game->pos->enemy_y / 64 - 1, game->pos->enemy_x / 64))
-			game->map->game_map[game->pos->enemy_y / 64][game->pos->enemy_x / 64] = '0';
-	}
-	else if (game->pos->e_direction == _DIR_RİGHT)
-	{	
-		if (!(i % 30) && flood_fill_enemy(game, game->pos->enemy_y / 64, game->pos->enemy_x / 64 + 1))
-			game->map->game_map[game->pos->enemy_y / 64][game->pos->enemy_x / 64] = '0';
+	return (0);
+}
+
+static void	whereisenemy2(t_game *game, int i)
+{
+	if (game->pos->e_direction == _DIR_RIGHT)
+	{
+		if (!(i % 30) && flood_fill_enemy(game, game->pos->enemy_y / 64,
+				game->pos->enemy_x / 64 + 1))
+			game->map->game_map[game->pos->enemy_y / 64][game->pos->enemy_x
+				/ 64] = '0';
 	}
 	else if (game->pos->e_direction == _DIR_DOWN)
-	{	
-		if (!(i % 30) && flood_fill_enemy(game, game->pos->enemy_y / 64 + 1, game->pos->enemy_x / 64))
-			game->map->game_map[game->pos->enemy_y / 64][game->pos->enemy_x / 64] = '0';
+	{
+		if (!(i % 30) && flood_fill_enemy(game, game->pos->enemy_y / 64 + 1,
+				game->pos->enemy_x / 64))
+			game->map->game_map[game->pos->enemy_y / 64][game->pos->enemy_x
+				/ 64] = '0';
 	}
-	return 0;
+}
+
+int	whereisenemy(t_game *game)
+{
+	static int	i = 0;
+
+	enemy_cords(game);
+	i++;
+	if (game->pos->e_direction == _DIR_LEFT)
+	{
+		if (!(i % 30) && flood_fill_enemy(game, game->pos->enemy_y / 64,
+				game->pos->enemy_x / 64 - 1))
+			game->map->game_map[game->pos->enemy_y / 64][game->pos->enemy_x
+				/ 64] = '0';
+	}
+	else if (game->pos->e_direction == _DIR_UP)
+	{
+		if (!(i % 30) && flood_fill_enemy(game, game->pos->enemy_y / 64 - 1,
+				game->pos->enemy_x / 64))
+			game->map->game_map[game->pos->enemy_y / 64][game->pos->enemy_x
+				/ 64] = '0';
+	}
+	whereisenemy2(game, i);
+	return (0);
 }

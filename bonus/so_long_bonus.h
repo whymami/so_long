@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 15:41:30 by beyarsla          #+#    #+#             */
-/*   Updated: 2024/03/22 17:05:41 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/03/23 14:52:11 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,16 @@
 # define _EXIT 'E'
 # define _ENEMY 'X'
 
+# define COLOR_RESET	"\x1B[0m"
+# define RED			"\x1B[31m"
+# define GREEN			"\x1B[32m"
+# define YELLOW			"\x1B[33m"
+# define BOLD			"\x1B[1m"
+
 # define _DIR_UP 0
 # define _DIR_DOWN 1
 # define _DIR_LEFT 2
-# define _DIR_RİGHT 3
+# define _DIR_RIGHT 3
 
 # define _KEY_A 0
 # define _KEY_S 1
@@ -63,6 +69,10 @@
 # define COLL_XPM_NOT_FOUND 21
 # define WINDOW_SIZE_ERROR 22
 # define _ENEMY_COUNT 23
+# define _ENEMY_REACHABLE 24
+
+# define MEM_MSG "failed to allocate memory space"
+# define CHR_MSG "Unrecognized character in map file"
 
 typedef struct s_map
 {
@@ -76,28 +86,28 @@ typedef struct s_counter
 	int	p_counter;
 	int	e_counter;
 	int	c_counter;
-	int x_counter;
+	int	x_counter;
 }		t_counter;
 
 typedef struct s_locate
 {
 	int	player_x;
 	int	player_y;
-	int enemy_x;
-	int enemy_y;
+	int	enemy_x;
+	int	enemy_y;
 	int	exit_x;
 	int	exit_y;
 	int	move;
 	int	direction;
-	int e_direction;
+	int	e_direction;
 }		t_locate;
 
-typedef struct s_collectible_node 
+typedef struct s_collectible_node
 {
-    int x;
-    int y;
-    struct s_collectible_node *next;
-} 			t_collectible_node;
+	int							x;
+	int							y;
+	struct s_collectible_node	*next;
+}								t_collectible_node;
 
 typedef struct s_texture
 {
@@ -108,25 +118,21 @@ typedef struct s_texture
 	void	*ground_img;
 	void	*exit_img;
 	void	*exit_full_img;
-	void	*coll1_img;
-	void	*coll2_img;
-	void	*coll3_img;
-	void	*wall1_img;
-	void	*wall2_img;
-	void	*wall3_img;
+	void	*coll_img;
+	void	*wall_img;
 }			t_textures;
-
 
 typedef struct s_state
 {
-	void		*mlx;
-	void		*window;
-	t_map		*map;
-	t_counter	*counters;
-	t_locate	*pos;
-	t_textures	*image;
-	t_collectible_node *collectibles;
-}				t_game;
+	void				*mlx;
+	void				*window;
+	t_map				*map;
+	t_counter			*counters;
+	t_locate			*pos;
+	t_textures			*image;
+	t_collectible_node	*collectibles;
+	int					score;
+}						t_game;
 
 void	copy_map(t_game *game);
 void	ref_control(t_game *game);
@@ -134,17 +140,17 @@ void	ft_window_size(t_game *game);
 void	ft_get_path_xpm(t_game *game);
 void	ft_create_window(t_game *game);
 void	ft_bns_map_check(char *str);
-int	ft_mouse_exit(t_game *game);
-int	ft_get_keycode(int keycode, t_game *game);
+int		ft_mouse_exit(t_game *game);
+int		ft_get_keycode(int keycode, t_game *game);
 void	ft_dispose_map(t_map *map);
 void	ft_dispose(t_game *game);
 void	ft_bns_exit(int err_no, char *err, t_game *game);
 void	ft_get_cords(t_game *game);
-int	ft_len_not_nl(char *str);
+int		ft_len_not_nl(char *str);
 void	flood_fill(t_map *tmp_map, int y, int x);
-int	is_reachable(t_map *tmp_game);
-int whereisenemy (t_game *game);
-int	flood_fill_enemy(t_game *game, int y, int x);
-
+int		is_reachable(t_map *tmp_game);
+int		whereisenemy(t_game *game);
+int		flood_fill_enemy(t_game *game, int y, int x);
+void	ft_score(t_game *game);
 
 #endif

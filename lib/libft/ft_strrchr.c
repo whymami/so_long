@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 11:55:28 by muguveli          #+#    #+#             */
-/*   Updated: 2024/03/10 16:25:51 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/03/23 14:23:17 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_strrchr(const char *str, int c)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = ft_strlen(str);
 	j = i - 4;

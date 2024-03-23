@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:47:06 by muguveli          #+#    #+#             */
-/*   Updated: 2024/03/16 17:38:18 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/03/23 14:27:08 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,25 @@
 
 # define _KEY_EXIT 17
 
-#ifndef _KEY_W
-# define _KEY_W 13
-#endif
+# ifndef _KEY_W
+#  define _KEY_W 13
+# endif
 
-#ifndef _KEY_A
-# define _KEY_A 0
-#endif
+# ifndef _KEY_A
+#  define _KEY_A 0
+# endif
 
-#ifndef _KEY_S
-# define _KEY_S 1
-#endif
+# ifndef _KEY_S
+#  define _KEY_S 1
+# endif
 
-#ifndef _KEY_D
-# define _KEY_D 2
-#endif
+# ifndef _KEY_D
+#  define _KEY_D 2
+# endif
 
-#ifndef _KEY_ESC
-# define _KEY_ESC 53
-#endif
-
+# ifndef _KEY_ESC
+#  define _KEY_ESC 53
+# endif
 
 # define _SUCC_EXIT 0
 # define _INV_ARG 1

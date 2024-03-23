@@ -73,7 +73,7 @@ bonus: $(BNS_OBJ) $(PRINTF) $(LIBFT) $(GET_NEXT_LINE) $(MLX)
 	@$(CC) $(CFLAGS) $(BNS_OBJ) $(PRINTF) $(LIBFT) $(GET_NEXT_LINE) $(GET_NEXT_LINE_UTILS) $(MLX) $(LDFLAGS) -o $(BONUS_NAME)
 	$(CLEAR)
 	@echo "\033[1;34mCompile\033[0m \033[1;32m[Success]\033[0m"
-	@echo "$(BLUE)$(BOLD)How to use :$(RESET) $(LIGHT_GREEN)$(BOLD)./so_long_bonus maps/<map name>.ber$(RESET)"
+	@echo "$(BLUE)$(BOLD)How to use :$(RESET) $(LIGHT_GREEN)$(BOLD)./so_long_bonus maps/map_bonus/<map name>.ber$(RESET)"
 
 $(PRINTF):
 	@$(MAKE) -C $(PRINTF_PATH)

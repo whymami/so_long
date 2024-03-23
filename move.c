@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:21:10 by muguveli          #+#    #+#             */
-/*   Updated: 2024/03/16 15:09:52 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/03/23 14:25:09 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ static void	key_a_d(t_game *game, int keycode)
 
 int	ft_get_keycode(int keycode, t_game *game)
 {
-	ft_printf("%d\n",keycode);
 	if (keycode == _KEY_ESC || keycode == _KEY_EXIT)
 		ft_exit(_SUCC_EXIT, "Exit successful", game);
 	if (keycode == _KEY_A || keycode == _KEY_D)
