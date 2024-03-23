@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 13:15:55 by muguveli          #+#    #+#             */
-/*   Updated: 2024/03/23 13:41:16 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/03/23 17:01:56 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,10 @@ static void	xpm_control2(t_game *game)
 	if (fd < 0 && close(fd))
 		ft_bns_exit(WALL_XPM_NOT_FOUND,
 			YELLOW "wall1.xpm not found" COLOR_RESET, game);
-	fd = open("texture/bonus_img/wall2.xpm", O_RDONLY);
+	fd = open("texture/bonus_img/collect1.xpm", O_RDONLY);
 	if (fd < 0 && close(fd))
 		ft_bns_exit(COLL_XPM_NOT_FOUND,
 			YELLOW "collect1.xpm not found" COLOR_RESET, game);
-	fd = open("texture/bonus_img/collect2.xpm", O_RDONLY);
-	if (fd < 0 && close(fd))
-		ft_bns_exit(COLL_XPM_NOT_FOUND,
-			YELLOW "collect2.xpm not found" COLOR_RESET, game);
 	fd = open("texture/exitfull.xpm", O_RDONLY);
 	if (fd < 0 && close(fd))
 		ft_bns_exit(EXITFULL_XPM_NOT_FOUND,

@@ -6,17 +6,17 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:47:06 by muguveli          #+#    #+#             */
-/*   Updated: 2024/03/23 14:27:08 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/03/23 16:54:24 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "lib/mlx/mlx.h"
-# include "lib/libft/libft.h"
-# include "lib/get_next_line/get_next_line.h"
-# include "lib/ft_printf/ft_printf.h"
+# include "../lib/mlx/mlx.h"
+# include "../lib/libft/libft.h"
+# include "../lib/get_next_line/get_next_line.h"
+# include "../lib/ft_printf/ft_printf.h"
 # include "fcntl.h"
 
 # define _ELEMENTS "10PEC"

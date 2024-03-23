@@ -29,14 +29,14 @@ endif
 
 
 SRC = \
-	main.c \
-	control1.c \
-	control2.c \
-	img_and_wndw.c \
-	map_check.c \
-	move.c \
-	utils.c \
-	utils2.c
+	mandatory_part/main.c \
+	mandatory_part/control1.c \
+	mandatory_part/control2.c \
+	mandatory_part/img_and_wndw.c \
+	mandatory_part/map_check.c \
+	mandatory_part/move.c \
+	mandatory_part/utils.c \
+	mandatory_part/utils2.c
 
 BNS_SRC = \
 	bonus/main_bonus.c \
