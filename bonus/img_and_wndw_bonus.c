@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 15:49:38 by beyarsla          #+#    #+#             */
-/*   Updated: 2024/03/23 14:52:31 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/03/23 15:19:47 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,11 @@ static void	ft_direction(t_game *game)
 	else
 		mlx_put_image_to_window(game->mlx, game->window,
 			game->image->exit_full_img, game->pos->exit_x, game->pos->exit_y);
-	if (game->pos->e_direction != _DIR_LEFT)
+	if (game->pos->e_direction != _DIR_LEFT && game->counters->x_counter == 1)
 		mlx_put_image_to_window(game->mlx, game->window, game->image->enemy_img,
 			game->pos->enemy_x, game->pos->enemy_y);
-	else if (game->pos->e_direction != _DIR_RIGHT)
+	else if (game->pos->e_direction != _DIR_RIGHT
+		&& game->counters->x_counter == 1)
 		mlx_put_image_to_window(game->mlx, game->window,
 			game->image->enemy_left_img, game->pos->enemy_x,
 			game->pos->enemy_y);

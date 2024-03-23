@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 15:23:27 by muguveli          #+#    #+#             */
-/*   Updated: 2024/03/23 14:36:29 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/03/23 15:17:46 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static void	whereisenemy2(t_game *game, int i)
 	}
 }
 
-int	whereisenemy(t_game *game)
+void	whereisenemy(t_game *game)
 {
 	static int	i = 0;
 
@@ -110,5 +110,4 @@ int	whereisenemy(t_game *game)
 				/ 64] = '0';
 	}
 	whereisenemy2(game, i);
-	return (0);
 }

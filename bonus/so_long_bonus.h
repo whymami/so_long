@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 15:41:30 by beyarsla          #+#    #+#             */
-/*   Updated: 2024/03/23 14:52:11 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/03/23 15:16:15 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ void	ft_get_cords(t_game *game);
 int		ft_len_not_nl(char *str);
 void	flood_fill(t_map *tmp_map, int y, int x);
 int		is_reachable(t_map *tmp_game);
-int		whereisenemy(t_game *game);
+void	whereisenemy(t_game *game);
 int		flood_fill_enemy(t_game *game, int y, int x);
 void	ft_score(t_game *game);
 
