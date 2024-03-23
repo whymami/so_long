@@ -17,13 +17,11 @@ ifeq ($(UNAME), Linux)
 	MLX_PATH = lib/mlx_linux
 	MLX = $(MLX_PATH)/libmlx.a
 	LDFLAGS = -L$(MLX_PATH) -lXext -lX11 -lm -lbsd
-	CFLAGS = -Wall -Wextra -Werror -D _KEY_W=119 -D _KEY_A=97 -D _KEY_S=115 -D _KEY_D=100 -D _KEY_ESC=65307
 	CLEAR = clear
 else
 	MLX_PATH = lib/mlx
 	MLX = $(MLX_PATH)/libmlx.a
 	LDFLAGS = -L$(MLX_PATH) -lmlx -framework OpenGL -framework AppKit
-	CFLAGS = -Wall -Wextra -Werror
 	CLEAR = printf "\033c"
 endif
 
