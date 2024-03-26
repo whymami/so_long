@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/20 15:41:30 by beyarsla          #+#    #+#             */
-/*   Updated: 2024/03/23 15:16:15 by muguveli         ###   ########.fr       */
+/*   Created: 2024/03/26 13:01:48 by muguveli          #+#    #+#             */
+/*   Updated: 2024/03/26 14:43:53 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define _PLAYER 'P'
 # define _EXIT 'E'
 # define _ENEMY 'X'
+# define FRAME_DELAY 100000000
 
 # define COLOR_RESET	"\x1B[0m"
 # define RED			"\x1B[31m"
@@ -70,6 +71,7 @@
 # define WINDOW_SIZE_ERROR 22
 # define _ENEMY_COUNT 23
 # define _ENEMY_REACHABLE 24
+# define EMPTY_MAP 25
 
 # define MEM_MSG "failed to allocate memory space"
 # define CHR_MSG "Unrecognized character in map file"
@@ -152,5 +154,6 @@ int		is_reachable(t_map *tmp_game);
 void	whereisenemy(t_game *game);
 int		flood_fill_enemy(t_game *game, int y, int x);
 void	ft_score(t_game *game);
+int		ber_control(char *str);
 
 #endif

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/20 16:02:00 by beyarsla          #+#    #+#             */
-/*   Updated: 2024/03/23 15:28:56 by muguveli         ###   ########.fr       */
+/*   Created: 2024/03/26 13:02:07 by muguveli          #+#    #+#             */
+/*   Updated: 2024/03/26 13:02:09 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,15 @@ void	ft_score(t_game *game)
 	mlx_string_put(game->mlx, game->window, 90, 35, 0xFFFFFF, score);
 	free(score);
 	free(move);
+}
+
+int	ber_control(char *str)
+{
+	int	len;
+
+	len = ft_strlen(str);
+	if (str[--len] == 'r' && str[--len] == 'e'
+		&& str[--len] == 'b' && str[--len] == '.')
+		return (1);
+	return (0);
 }

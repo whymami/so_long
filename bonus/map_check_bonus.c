@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 15:43:50 by beyarsla          #+#    #+#             */
-/*   Updated: 2024/03/23 15:13:19 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:43:23 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	ft_bns_read_map(char *str, t_game *game)
 	int	y;
 	int	fd;
 
+	ft_window_size(game);
 	y = 0;
 	game->map->game_map = malloc(game->map->map_y * sizeof(char *));
 	if (!game->map->game_map)
@@ -85,20 +86,14 @@ void	ft_bns_map_check(char *str)
 	if (!str[0] && close(fd))
 		ft_bns_exit(_MAP_NAME,
 			YELLOW "Map name cannot be left blank" COLOR_RESET, NULL);
-	if (ft_strrchr(str, '.') && ft_strrchr(str, 'b') && ft_strrchr(str, 'e')
-		&& ft_strrchr(str, 'r'))
+	close(fd);
+	if (ber_control(str))
 	{
 		if (3 > fd)
-		{
-			close(fd);
 			ft_bns_exit(_MAP_NOT_OPEN, YELLOW "Map not found" COLOR_RESET,
 				NULL);
-		}
 		else
-		{
-			close(fd);
 			ft_bns_get_map_size(str);
-		}
 	}
 	else
 		ft_bns_exit(_INV_EXTENTION, YELLOW

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/20 15:50:58 by beyarsla          #+#    #+#             */
-/*   Updated: 2024/03/23 15:28:11 by muguveli         ###   ########.fr       */
+/*   Created: 2024/03/26 13:01:58 by muguveli          #+#    #+#             */
+/*   Updated: 2024/03/26 13:02:00 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	ft_bns_exit(int err_no, char *err, t_game *game)
 	if (err_no == _SUCC_EXIT || err_no == _FINISH_GAME)
 	{
 		if (err_no == _FINISH_GAME)
-			ft_printf(BOLD YELLOW "Move Step: %d\n"COLOR_RESET BOLD YELLOW"Score: %d\n"COLOR_RESET, game->pos->move, game->score);
+			ft_printf(BOLD YELLOW "Move Step: %d\n"COLOR_RESET BOLD YELLOW
+				"Score: %d\n"COLOR_RESET, game->pos->move, game->score);
 		ft_putstr_fd(err, 2);
 		exit(0);
 	}

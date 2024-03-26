@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:00:14 by muguveli          #+#    #+#             */
-/*   Updated: 2024/03/16 17:52:39 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/03/26 12:41:32 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static void	ft_get_map_size(char *str)
 	}
 	free(line);
 	close(fd);
+	ft_window_size(game);
 	ft_read_map(str, game);
 }
 
@@ -81,19 +82,13 @@ void	ft_map_check(char *str)
 	fd = open(str, O_RDONLY);
 	if (!str[0] && close(fd))
 		ft_exit(_MAP_NAME, "Map name cannot be left blank", NULL);
-	if (ft_strrchr(str, '.') && ft_strrchr(str, 'b') && ft_strrchr(str, 'e')
-		&& ft_strrchr(str, 'r'))
+	close(fd);
+	if (ber_control(str))
 	{
 		if (3 > fd)
-		{
-			close(fd);
 			ft_exit(_MAP_NOT_OPEN, "Map not found", NULL);
-		}
 		else
-		{
-			close(fd);
 			ft_get_map_size(str);
-		}
 	}
 	else
 		ft_exit(_INV_EXTENTION,

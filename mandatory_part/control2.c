@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:18:13 by muguveli          #+#    #+#             */
-/*   Updated: 2024/03/16 17:43:52 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/03/26 12:08:17 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_window_size(t_game *game)
 {
-	ft_printf("map_x: %d\n", game->map->map_x);
-	ft_printf("map_y: %d\n", game->map->map_y);
+	if (game->map->map_x == 0 || game->map->map_y == 0)
+		ft_exit(EMPTY_MAP, "Map file cannot be left empty", game);
 	if (game->map->map_x > 20 || game->map->map_y > 10)
 		ft_exit(WINDOW_SIZE_ERROR, "Window size is too big", game);
 }

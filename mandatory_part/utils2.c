@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:23:58 by muguveli          #+#    #+#             */
-/*   Updated: 2024/03/16 15:05:50 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/03/26 12:32:45 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,16 @@ int	is_reachable(t_map *tmp_game)
 		}
 	}
 	ft_dispose_map(tmp_game);
+	return (0);
+}
+
+int	ber_control(char *str)
+{
+	int	len;
+
+	len = ft_strlen(str);
+	if (str[--len] == 'r' && str[--len] == 'e'
+		&& str[--len] == 'b' && str[--len] == '.')
+		return (1);
 	return (0);
 }

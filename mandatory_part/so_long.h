@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:47:06 by muguveli          #+#    #+#             */
-/*   Updated: 2024/03/23 16:54:24 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/03/26 11:59:04 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@
 # define GRASS_XPM_NOT_FOUND 20
 # define COLL_XPM_NOT_FOUND 21
 # define WINDOW_SIZE_ERROR 22
+# define EMPTY_MAP 23
 
 typedef struct s_map
 {
@@ -133,5 +134,6 @@ int		ft_mouse_exit(t_game *game);
 void	copy_map(t_game *game);
 int		is_reachable(t_map *tmp_game);
 void	ft_window_size(t_game *game);
+int		ber_control(char *str);
 
 #endif

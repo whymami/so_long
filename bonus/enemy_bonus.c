@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 15:23:27 by muguveli          #+#    #+#             */
-/*   Updated: 2024/03/23 15:17:46 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/03/23 17:37:37 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,6 @@ static void	change_dir(t_game *game, int y, int x)
 
 int	flood_fill_enemy(t_game *game, int y, int x)
 {
-	static int	i = 0;
-
-	i++;
 	if (game->pos->enemy_x / 64 == game->pos->player_x / 64
 		&& game->pos->enemy_y / 64 == game->pos->player_y / 64)
 		ft_bns_exit(_FINISH_GAME, RED "YOU LOSE" COLOR_RESET, game);

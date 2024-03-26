@@ -6,7 +6,7 @@
 /*   By: muguveli <muguveli@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 14:15:12 by muguveli          #+#    #+#             */
-/*   Updated: 2024/03/23 14:35:25 by muguveli         ###   ########.fr       */
+/*   Updated: 2024/03/26 12:35:20 by muguveli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	ft_create_window(t_game *game)
 {
 	game->mlx = mlx_init();
 	ft_get_cords(game);
+	game->pos->move = 1;
 	copy_map(game);
 	game->window = mlx_new_window(game->mlx, game->map->map_x * 64,
 			game->map->map_y * 64, "SO_LONG");
